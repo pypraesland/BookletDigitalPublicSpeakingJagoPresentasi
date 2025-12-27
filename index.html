@@ -12,13 +12,54 @@
         h1, h2, h3, h4 { font-family: 'Fredoka', sans-serif; }
         
         .booklet-container {
-            max-width: 550px;
             margin: 0 auto;
             background: #fff;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             min-height: 100vh;
-            overflow: hidden;
-            border-radius: 0px; /* Reset border radius for mobile feel */
+            overflow-x: hidden;
+        }
+
+        /* Default (Mobile) - Portrait */
+        @media (max-width: 1023px) {
+            .booklet-container {
+                max-width: 550px;
+                border-radius: 0px;
+            }
+            .desktop-layout { display: none; }
+            .mobile-layout { display: block; }
+        }
+
+        /* Desktop - Landscape */
+        @media (min-width: 1024px) {
+            .booklet-container {
+                max-width: 1200px; /* Lebar Landscape */
+                margin: 40px auto;
+                border-radius: 20px;
+                min-height: auto;
+                padding-bottom: 40px;
+            }
+            body {
+                background-color: #eef2ff; /* Background luar booklet di desktop */
+                padding: 20px;
+            }
+            .desktop-layout { display: flex; flex-wrap: wrap; gap: 20px; padding: 40px; }
+            .mobile-layout { display: none; }
+            
+            /* Card Style for Desktop Pages */
+            .page-card {
+                flex: 1 1 45%; /* 2 Kolom */
+                min-width: 400px;
+                border-radius: 24px;
+                overflow: hidden;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+            }
+            .page-card:hover {
+                transform: translateY(-5px);
+            }
+            .page-full {
+                flex: 1 1 100%; /* Full Width Card */
+            }
         }
 
         /* Fun Shapes */
@@ -40,278 +81,252 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            border: 2px solid rgba(255, 255, 255, 0.5);
-        }
     </style>
 </head>
 <body>
 
-    <div class="booklet-container relative bg-white">
+    <!-- CONTAINER UTAMA -->
+    <div class="booklet-container bg-white">
         
-        <!-- HALAMAN 1: COVER YANG CERIA -->
-        <div class="relative min-h-[95vh] bg-gradient-to-br from-yellow-100 via-pink-100 to-blue-100 flex flex-col justify-center p-8 overflow-hidden text-center">
-            
-            <!-- Animated Blobs -->
-            <div class="blob w-64 h-64 bg-yellow-300 top-[-50px] right-[-80px] opacity-70 blur-2xl"></div>
-            <div class="blob w-72 h-72 bg-blue-300 bottom-[-50px] left-[-80px] opacity-70 blur-2xl animation-delay-2000"></div>
-            <div class="blob w-40 h-40 bg-pink-300 top-[40%] left-[10%] opacity-60 blur-xl"></div>
+        <!-- MOBILE LAYOUT (Portrait, Scroll Down) -->
+        <div class="mobile-layout">
+            <!-- HALAMAN 1: COVER -->
+            <div class="relative min-h-[95vh] bg-gradient-to-br from-yellow-100 via-pink-100 to-blue-100 flex flex-col justify-center p-8 overflow-hidden text-center">
+                <div class="blob w-64 h-64 bg-yellow-300 top-[-50px] right-[-80px] opacity-70 blur-2xl"></div>
+                <div class="blob w-72 h-72 bg-blue-300 bottom-[-50px] left-[-80px] opacity-70 blur-2xl animation-delay-2000"></div>
+                <div class="blob w-40 h-40 bg-pink-300 top-[40%] left-[10%] opacity-60 blur-xl"></div>
 
-            <div class="relative z-10">
-                <div class="inline-block px-5 py-2 bg-white rounded-full shadow-md text-blue-600 font-bold text-sm tracking-wide mb-8 transform -rotate-2 border-2 border-blue-100">
-                    ✨ Program Privat 1-on-1
+                <div class="relative z-10">
+                    <div class="inline-block px-5 py-2 bg-white rounded-full shadow-md text-blue-600 font-bold text-sm tracking-wide mb-8 transform -rotate-2 border-2 border-blue-100">
+                        ✨ Program Privat 1-on-1
+                    </div>
+                    <h1 class="text-6xl font-semibold text-slate-800 leading-none mb-2 drop-shadow-sm">Jago<br><span class="text-blue-600">Presentasi</span></h1>
+                    <h2 class="text-3xl font-medium text-purple-600 mb-6 mt-2 bg-white/50 inline-block px-4 py-1 rounded-lg">Karya Tulis Ilmiah</h2>
+                    <div class="flex items-center justify-center gap-3 mb-8">
+                        <span class="h-px w-8 bg-slate-400"></span>
+                        <span class="text-slate-600 font-bold text-lg">& Persiapan Wawancara</span>
+                        <span class="h-px w-8 bg-slate-400"></span>
+                    </div>
+                    <div class="bg-white/90 p-6 rounded-2xl shadow-xl border-b-4 border-r-4 border-blue-200">
+                        <p class="text-slate-700 font-semibold text-lg leading-relaxed">"Ubah data penelitian jadi cerita juara dan hadapi wawancara organisasi dengan percaya diri!" 🚀</p>
+                    </div>
                 </div>
-                
-                <h1 class="text-6xl font-semibold text-slate-800 leading-none mb-2 drop-shadow-sm">
-                    Jago<br>
-                    <span class="text-blue-600">Presentasi</span>
-                </h1>
-                <h2 class="text-3xl font-medium text-purple-600 mb-6 mt-2 bg-white/50 inline-block px-4 py-1 rounded-lg">
-                    Karya Tulis Ilmiah
-                </h2>
-                
-                <div class="flex items-center justify-center gap-3 mb-8">
-                    <span class="h-px w-8 bg-slate-400"></span>
-                    <span class="text-slate-600 font-bold text-lg">& Persiapan Wawancara</span>
-                    <span class="h-px w-8 bg-slate-400"></span>
-                </div>
-
-                <div class="bg-white/90 p-6 rounded-2xl shadow-xl border-b-4 border-r-4 border-blue-200 transform hover:scale-105 transition duration-300">
-                    <p class="text-slate-700 font-semibold text-lg leading-relaxed">
-                        "Ubah data penelitian jadi cerita juara dan hadapi wawancara organisasi dengan percaya diri!" 🚀
-                    </p>
+                <div class="absolute bottom-10 left-0 w-full animate-bounce">
+                    <i data-lucide="chevrons-down" class="w-8 h-8 mx-auto text-blue-500"></i>
                 </div>
             </div>
 
-            <div class="absolute bottom-10 left-0 w-full animate-bounce">
-                <p class="text-slate-400 text-xs font-bold mb-2 uppercase tracking-widest">Gulir ke bawah</p>
-                <i data-lucide="chevrons-down" class="w-8 h-8 mx-auto text-blue-500"></i>
-            </div>
-        </div>
-
-        <!-- HALAMAN 2: GOAL PROGRAM (COLORFUL) -->
-        <div class="relative bg-white p-8 py-16">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-purple-100 rounded-bl-full z-0"></div>
-            
-            <h2 class="text-4xl font-bold text-slate-800 mb-10 relative z-10 text-center">
-                <span class="bg-yellow-200 px-2 transform -rotate-1 inline-block">Goal</span> Program
-            </h2>
-            
-            <div class="space-y-6 relative z-10">
-                <!-- Goal 1 -->
-                <div class="bg-blue-50 p-6 rounded-3xl border-2 border-blue-100 shadow-sm flex items-start gap-4 hover:shadow-md transition">
-                    <div class="bg-blue-500 w-12 h-12 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-lg transform rotate-3 flex-shrink-0">
-                        <i data-lucide="trophy" class="w-6 h-6"></i>
+            <!-- HALAMAN 2: GOAL -->
+            <div class="relative bg-white p-8 py-16">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-purple-100 rounded-bl-full z-0"></div>
+                <h2 class="text-4xl font-bold text-slate-800 mb-10 relative z-10 text-center"><span class="bg-yellow-200 px-2 transform -rotate-1 inline-block">Goal</span> Program</h2>
+                <div class="space-y-6 relative z-10">
+                    <div class="bg-blue-50 p-6 rounded-3xl border-2 border-blue-100 shadow-sm flex items-start gap-4">
+                        <div class="bg-blue-500 w-12 h-12 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-lg transform rotate-3 flex-shrink-0"><i data-lucide="trophy" class="w-6 h-6"></i></div>
+                        <div><h3 class="text-xl font-bold text-blue-800 mb-2">Juara LKTI</h3><p class="text-slate-600 text-sm leading-6 font-medium">Strategi memenangkan LKTI dengan teknik penyampaian meyakinkan.</p></div>
                     </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-blue-800 mb-2">Juara LKTI</h3>
-                        <p class="text-slate-600 text-sm leading-6 font-medium">Strategi memenangkan <strong>Lomba Karya Tulis Ilmiah</strong> dengan teknik penyampaian yang meyakinkan dan memukau juri.</p>
-                    </div>
-                </div>
-
-                <!-- Goal 2 -->
-                <div class="bg-pink-50 p-6 rounded-3xl border-2 border-pink-100 shadow-sm flex items-start gap-4 hover:shadow-md transition">
-                    <div class="bg-pink-500 w-12 h-12 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-lg transform -rotate-3 flex-shrink-0">
-                        <i data-lucide="users" class="w-6 h-6"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-pink-800 mb-2">Lolos Organisasi</h3>
-                        <p class="text-slate-600 text-sm leading-6 font-medium">Membangun mental agar bisa menjawab pertanyaan wawancara rekrutmen organisasi dengan <strong>elegan & percaya diri</strong>.</p>
+                    <div class="bg-pink-50 p-6 rounded-3xl border-2 border-pink-100 shadow-sm flex items-start gap-4">
+                        <div class="bg-pink-500 w-12 h-12 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-lg transform -rotate-3 flex-shrink-0"><i data-lucide="users" class="w-6 h-6"></i></div>
+                        <div><h3 class="text-xl font-bold text-pink-800 mb-2">Lolos Organisasi</h3><p class="text-slate-600 text-sm leading-6 font-medium">Menjawab pertanyaan wawancara rekrutmen dengan elegan & percaya diri.</p></div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- HALAMAN 3: ROADMAP SESI 1-2 (VIBRANT) -->
-        <div class="bg-gradient-to-b from-slate-50 to-white p-8 py-12 relative overflow-hidden">
-            <!-- Background element -->
-            <div class="absolute top-10 left-[-20px] w-24 h-24 bg-yellow-300 rounded-full blur-xl opacity-50"></div>
-
-            <div class="text-center mb-10">
-                <span class="bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-xs font-extrabold uppercase tracking-wide">Kurikulum</span>
-                <h2 class="text-3xl font-bold text-slate-800 mt-3">Roadmap Belajar</h2>
-            </div>
-
-            <!-- Sesi 1 -->
-            <div class="mb-8 relative group">
-                <div class="absolute -left-2 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-400 to-purple-400 rounded-full"></div>
-                <div class="pl-6">
-                    <div class="flex justify-between items-end mb-2">
-                        <h3 class="text-2xl font-bold text-slate-800">Sesi 01</h3>
-                        <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded">1,5 Jam</span>
-                    </div>
+            <!-- HALAMAN 3: ROADMAP 1-2 -->
+            <div class="bg-gradient-to-b from-slate-50 to-white p-8 py-12 relative">
+                <div class="text-center mb-10"><span class="bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-xs font-extrabold uppercase tracking-wide">Kurikulum</span><h2 class="text-3xl font-bold text-slate-800 mt-3">Roadmap Belajar</h2></div>
+                <!-- Sesi 1 Mobile -->
+                <div class="mb-8 relative group pl-6 border-l-4 border-blue-400">
+                    <h3 class="text-2xl font-bold text-slate-800">Sesi 01 <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded align-middle ml-2">1,5 Jam</span></h3>
                     <h4 class="text-lg font-bold text-blue-600 mb-3">Bedah Struktur & Poin Kunci</h4>
-                    
                     <div class="bg-white p-5 rounded-2xl shadow-lg border border-slate-100 space-y-3">
-                        <div class="flex items-start gap-3">
-                            <i data-lucide="check-circle-2" class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0"></i>
-                            <p class="text-sm text-slate-600"><strong>Pre-Test:</strong> Cek ombak kemampuan awal.</p>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <i data-lucide="check-circle-2" class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0"></i>
-                            <p class="text-sm text-slate-600"><strong>Bedah Karya:</strong> Memilih bagian krusial untuk presentasi.</p>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <i data-lucide="check-circle-2" class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0"></i>
-                            <p class="text-sm text-slate-600"><strong>The "Wow" Points:</strong> Merumuskan poin-poin utama yang berpotensi memukau panelis.</p>
-                        </div>
+                        <p class="text-sm text-slate-600 flex gap-2"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500 flex-shrink-0"></i><strong>Pre-Test:</strong> Cek ombak kemampuan awal.</p>
+                        <p class="text-sm text-slate-600 flex gap-2"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500 flex-shrink-0"></i><strong>Bedah Karya:</strong> Memilih bagian krusial.</p>
+                        <p class="text-sm text-slate-600 flex gap-2"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500 flex-shrink-0"></i><strong>The "Wow" Points:</strong> Merumuskan poin utama pemukau panelis.</p>
                     </div>
                 </div>
-            </div>
-
-            <!-- Sesi 2 -->
-            <div class="relative group">
-                <div class="absolute -left-2 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-400 to-pink-400 rounded-full"></div>
-                <div class="pl-6">
-                    <div class="flex justify-between items-end mb-2">
-                        <h3 class="text-2xl font-bold text-slate-800">Sesi 02</h3>
-                        <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded">1,5 Jam</span>
-                    </div>
+                <!-- Sesi 2 Mobile -->
+                <div class="relative group pl-6 border-l-4 border-purple-400">
+                    <h3 class="text-2xl font-bold text-slate-800">Sesi 02 <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded align-middle ml-2">1,5 Jam</span></h3>
                     <h4 class="text-lg font-bold text-purple-600 mb-3">Hook & Storytelling</h4>
-                    
                     <div class="bg-white p-5 rounded-2xl shadow-lg border border-slate-100 space-y-3">
-                        <div class="flex items-start gap-3">
-                            <i data-lucide="zap" class="w-5 h-5 text-yellow-500 mt-0.5 flex-shrink-0"></i>
-                            <p class="text-sm text-slate-600"><strong>Killer Opening:</strong> Teknik "Hook" pembuka yang menyentak.</p>
+                        <p class="text-sm text-slate-600 flex gap-2"><i data-lucide="zap" class="w-5 h-5 text-yellow-500 flex-shrink-0"></i><strong>Killer Opening:</strong> Teknik "Hook" pembuka.</p>
+                        <p class="text-sm text-slate-600 flex gap-2"><i data-lucide="file-text" class="w-5 h-5 text-yellow-500 flex-shrink-0"></i><strong>Skenario:</strong> Menyusun alur naskah mengalir.</p>
+                        <p class="text-sm text-slate-600 flex gap-2"><i data-lucide="mic" class="w-5 h-5 text-yellow-500 flex-shrink-0"></i><strong>Meaningful Storytelling:</strong> Cerita ilmiah bermakna sesuai kaidah public speaking.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HALAMAN 4: ROADMAP 3-4 -->
+            <div class="bg-slate-900 text-white p-8 py-12">
+                <!-- Sesi 3 Mobile -->
+                <div class="mb-8">
+                    <div class="flex items-center gap-4 mb-4"><div class="bg-blue-600 w-10 h-10 rounded-lg flex items-center justify-center font-bold text-lg">03</div><div><h3 class="font-bold text-lg text-blue-200">Visual & Teknik</h3><p class="text-xs text-slate-400">Durasi: 1,5 Jam</p></div></div>
+                    <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700 space-y-3 text-sm text-slate-300">
+                        <p class="flex gap-3"><i data-lucide="monitor" class="w-4 h-4 text-blue-400"></i> Desain PPT estetik & informatif.</p>
+                        <p class="flex gap-3"><i data-lucide="user" class="w-4 h-4 text-blue-400"></i> Tips "Stage Presence" memukau.</p>
+                        <p class="flex gap-3"><i data-lucide="play" class="w-4 h-4 text-blue-400"></i> Latihan Presentasi Tahap 1.</p>
+                    </div>
+                </div>
+                <!-- Sesi 4 Mobile -->
+                <div>
+                    <div class="flex items-center gap-4 mb-4"><div class="bg-purple-600 w-10 h-10 rounded-lg flex items-center justify-center font-bold text-lg">04</div><div><h3 class="font-bold text-lg text-purple-200">Gladi Bersih</h3><p class="text-xs text-slate-400">Durasi: 1,5 Jam</p></div></div>
+                    <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700 space-y-3 text-sm text-slate-300">
+                        <p class="flex gap-3"><i data-lucide="refresh-cw" class="w-4 h-4 text-purple-400"></i> Simulasi presentasi full.</p>
+                        <p class="flex gap-3"><i data-lucide="help-circle" class="w-4 h-4 text-purple-400"></i> Simulasi tanya jawab kritis.</p>
+                        <p class="flex gap-3"><i data-lucide="message-circle" class="w-4 h-4 text-purple-400"></i> Feedback performa total.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HALAMAN 5: BONUS -->
+            <div class="bg-yellow-50 p-8 py-16 text-center">
+                <span class="inline-block bg-yellow-400 text-yellow-900 text-xs font-black px-3 py-1 rounded shadow-sm transform -rotate-2 mb-4">BONUS SKILLSET</span>
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Sesi 5: Wawancara</h2>
+                <div class="space-y-4 text-left">
+                    <div class="bg-white p-4 rounded-xl shadow-md border-l-4 border-yellow-400"><h4 class="font-bold text-slate-800 text-sm flex gap-2"><i data-lucide="search" class="w-4 h-4 text-yellow-500"></i> Psikologi</h4><p class="text-xs text-slate-600">Memahami apa yang dicari pewawancara.</p></div>
+                    <div class="bg-white p-4 rounded-xl shadow-md border-l-4 border-orange-400"><h4 class="font-bold text-slate-800 text-sm flex gap-2"><i data-lucide="star" class="w-4 h-4 text-orange-500"></i> Metode S.T.A.R</h4><p class="text-xs text-slate-600">Teknik menjawab terstruktur: Situation, Task, Action, Result.</p></div>
+                    <div class="bg-white p-4 rounded-xl shadow-md border-l-4 border-red-400"><h4 class="font-bold text-slate-800 text-sm flex gap-2"><i data-lucide="mic-2" class="w-4 h-4 text-red-500"></i> Role Play</h4><p class="text-xs text-slate-600">Praktik langsung menjawab pertanyaan jebakan.</p></div>
+                </div>
+            </div>
+
+            <!-- HALAMAN 6: HARGA -->
+            <div class="bg-white p-8 py-16">
+                <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl p-1 shadow-2xl">
+                    <div class="bg-white rounded-[1.4rem] p-6 text-center">
+                        <h3 class="text-gray-500 uppercase text-xs font-bold tracking-widest mb-4">Investasi Belajar</h3>
+                        <div class="flex justify-center items-baseline mb-6"><span class="text-5xl font-black text-slate-800 tracking-tighter">750</span><span class="text-xl font-bold text-slate-500 ml-1">rb</span></div>
+                        <div class="bg-slate-50 rounded-xl p-4 mb-6 space-y-3 text-sm">
+                            <div class="flex justify-between border-b border-slate-200 pb-2"><span class="text-slate-500">Total Sesi</span><span class="font-bold text-slate-800">5 Pertemuan</span></div>
+                            <div class="flex justify-between border-b border-slate-200 pb-2"><span class="text-slate-500">Durasi</span><span class="font-bold text-slate-800">7,5 Jam</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500">Per Jam</span><span class="font-bold text-slate-800">Rp 100.000</span></div>
                         </div>
-                        <div class="flex items-start gap-3">
-                            <i data-lucide="file-text" class="w-5 h-5 text-yellow-500 mt-0.5 flex-shrink-0"></i>
-                            <p class="text-sm text-slate-600"><strong>Skenario:</strong> Menyusun alur naskah yang mengalir.</p>
+                        <div class="space-y-2 text-left mb-4 text-xs font-bold">
+                            <div class="flex items-center gap-2 text-green-600 bg-green-50 p-2 rounded-lg"><i data-lucide="check-circle" class="w-4 h-4"></i> Termasuk Modul PPT</div>
+                            <div class="flex items-center gap-2 text-red-500 bg-red-50 p-2 rounded-lg"><i data-lucide="x-circle" class="w-4 h-4"></i> Tidak Ada Rekaman</div>
                         </div>
-                        <div class="flex items-start gap-3">
-                            <i data-lucide="mic" class="w-5 h-5 text-yellow-500 mt-0.5 flex-shrink-0"></i>
-                            <p class="text-sm text-slate-600"><strong>Meaningful Storytelling:</strong> Menyampaikan cerita ilmiah lebih bermakna & memukau sesuai kaidah <i>public speaking</i> (intonasi, tone, ritme, gestur, mimik, & emosi).</p>
-                        </div>
+                        <p class="text-[10px] text-slate-400">Jadwal fleksibel sesuai kesepakatan.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- HALAMAN 4: ROADMAP SESI 3-4 (DARK THEME) -->
-        <div class="bg-slate-900 text-white p-8 py-12 relative overflow-hidden">
-            <!-- Decor -->
-            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-600 rounded-full mix-blend-overlay filter blur-3xl opacity-20"></div>
-            
-            <!-- Sesi 3 -->
-            <div class="mb-8 relative z-10">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="bg-blue-600 w-10 h-10 rounded-lg flex items-center justify-center font-bold text-lg">03</div>
-                    <div>
-                        <h3 class="font-bold text-lg text-blue-200">Visual & Teknik</h3>
-                        <p class="text-xs text-slate-400">Durasi: 1,5 Jam</p>
+        <!-- DESKTOP LAYOUT (Landscape, Grid Card) -->
+        <div class="desktop-layout hidden">
+            <!-- PAGE 1: COVER & GOAL (Side by Side) -->
+            <div class="page-full flex gap-6">
+                <!-- Cover -->
+                <div class="flex-1 bg-gradient-to-br from-yellow-100 via-pink-100 to-blue-100 rounded-3xl p-10 flex flex-col justify-center items-center text-center relative overflow-hidden shadow-lg border border-white">
+                    <div class="blob w-64 h-64 bg-yellow-300 top-[-50px] left-[-50px] opacity-60 blur-3xl"></div>
+                    <div class="blob w-64 h-64 bg-pink-300 bottom-[-50px] right-[-50px] opacity-60 blur-3xl"></div>
+                    <div class="relative z-10">
+                        <div class="inline-block px-4 py-1 bg-white rounded-full text-blue-600 font-bold text-xs uppercase tracking-widest mb-6 shadow-sm border border-blue-100">Privat 1-on-1</div>
+                        <h1 class="text-6xl font-black text-slate-800 mb-2">Jago Presentasi</h1>
+                        <h2 class="text-4xl text-blue-600 font-bold mb-4">Karya Tulis Ilmiah</h2>
+                        <p class="text-xl text-slate-600 mb-8 font-medium">& Persiapan Wawancara Organisasi</p>
+                        <p class="text-slate-500 max-w-md mx-auto italic">"Ubah data penelitian jadi cerita juara dan hadapi wawancara organisasi dengan percaya diri!"</p>
                     </div>
-                </div>
-                <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700">
-                    <ul class="space-y-3 text-sm text-slate-300">
-                        <li class="flex gap-3 items-center"><i data-lucide="monitor" class="w-4 h-4 text-blue-400"></i> Desain PPT estetik & informatif.</li>
-                        <li class="flex gap-3 items-center"><i data-lucide="user" class="w-4 h-4 text-blue-400"></i> Tips "Stage Presence" memukau.</li>
-                        <li class="flex gap-3 items-center"><i data-lucide="play" class="w-4 h-4 text-blue-400"></i> Latihan Presentasi Tahap 1.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Sesi 4 -->
-            <div class="relative z-10">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="bg-purple-600 w-10 h-10 rounded-lg flex items-center justify-center font-bold text-lg">04</div>
-                    <div>
-                        <h3 class="font-bold text-lg text-purple-200">Gladi Bersih</h3>
-                        <p class="text-xs text-slate-400">Durasi: 1,5 Jam</p>
-                    </div>
-                </div>
-                <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700">
-                    <ul class="space-y-3 text-sm text-slate-300">
-                        <li class="flex gap-3 items-center"><i data-lucide="refresh-cw" class="w-4 h-4 text-purple-400"></i> Simulasi presentasi full.</li>
-                        <li class="flex gap-3 items-center"><i data-lucide="help-circle" class="w-4 h-4 text-purple-400"></i> Simulasi tanya jawab kritis.</li>
-                        <li class="flex gap-3 items-center"><i data-lucide="message-circle" class="w-4 h-4 text-purple-400"></i> Feedback performa total.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- HALAMAN 5: BONUS SESI (CERIA) -->
-        <div class="bg-yellow-50 p-8 py-16 relative overflow-hidden">
-            <div class="absolute -right-10 -top-10 w-40 h-40 bg-yellow-300 rounded-full blur-3xl opacity-30"></div>
-            
-            <div class="text-center mb-8 relative z-10">
-                <span class="inline-block bg-yellow-400 text-yellow-900 text-xs font-black px-3 py-1 rounded shadow-sm transform -rotate-2">BONUS SKILLSET</span>
-                <h2 class="text-3xl font-bold text-slate-900 mt-2">Sesi 5: Wawancara</h2>
-                <p class="text-slate-600 text-sm">Persiapan Rekrutmen Organisasi</p>
-            </div>
-
-            <div class="space-y-4 relative z-10">
-                <div class="bg-white p-4 rounded-xl shadow-md border-l-4 border-yellow-400">
-                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-                        <i data-lucide="search" class="w-4 h-4 text-yellow-500"></i> Psikologi
-                    </h4>
-                    <p class="text-xs text-slate-600 mt-1">Memahami apa yang sebenarnya dicari pewawancara dari jawaban kandidat.</p>
                 </div>
                 
-                <div class="bg-white p-4 rounded-xl shadow-md border-l-4 border-orange-400">
-                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-                        <i data-lucide="star" class="w-4 h-4 text-orange-500"></i> Metode S.T.A.R
-                    </h4>
-                    <p class="text-xs text-slate-600 mt-1">Teknik menjawab terstruktur: <strong>S</strong>ituation, <strong>T</strong>ask, <strong>A</strong>ction, <strong>R</strong>esult.</p>
-                </div>
-
-                <div class="bg-white p-4 rounded-xl shadow-md border-l-4 border-red-400">
-                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-                        <i data-lucide="mic-2" class="w-4 h-4 text-red-500"></i> Role Play
-                    </h4>
-                    <p class="text-xs text-slate-600 mt-1">Praktik langsung menjawab pertanyaan umum hingga pertanyaan jebakan.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- HALAMAN 6: HARGA (ELEGAN & JELAS) -->
-        <div class="bg-white p-8 py-16 text-center">
-            
-            <div class="max-w-xs mx-auto bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[2rem] p-1 shadow-2xl">
-                <div class="bg-white rounded-[1.8rem] p-6 h-full relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 to-purple-400"></div>
-                    
-                    <h3 class="text-gray-500 uppercase text-xs font-bold tracking-widest mb-4">Investasi Belajar</h3>
-                    
-                    <div class="flex justify-center items-baseline mb-6">
-                        <span class="text-5xl font-black text-slate-800 tracking-tighter">750</span>
-                        <span class="text-xl font-bold text-slate-500 ml-1">rb</span>
+                <!-- Goals -->
+                <div class="w-1/3 flex flex-col gap-6">
+                    <div class="flex-1 bg-blue-50 p-8 rounded-3xl border-2 border-blue-100 flex flex-col justify-center items-start shadow-md hover:shadow-lg transition">
+                        <div class="bg-blue-500 text-white w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-4 shadow-lg"><i data-lucide="trophy"></i></div>
+                        <h3 class="text-2xl font-bold text-blue-900 mb-2">Juara LKTI</h3>
+                        <p class="text-slate-600">Strategi memenangkan lomba dengan teknik penyampaian yang meyakinkan juri.</p>
                     </div>
-                    
-                    <div class="bg-slate-50 rounded-xl p-4 mb-6 space-y-3">
-                        <div class="flex justify-between items-center text-sm border-b border-slate-200 pb-2">
-                            <span class="text-slate-500">Total Sesi</span>
-                            <span class="font-bold text-slate-800">5 Pertemuan</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm border-b border-slate-200 pb-2">
-                            <span class="text-slate-500">Durasi</span>
-                            <span class="font-bold text-slate-800">7,5 Jam</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm">
-                            <span class="text-slate-500">Per Jam</span>
-                            <span class="font-bold text-slate-800">Rp 100.000</span>
-                        </div>
+                    <div class="flex-1 bg-pink-50 p-8 rounded-3xl border-2 border-pink-100 flex flex-col justify-center items-start shadow-md hover:shadow-lg transition">
+                        <div class="bg-pink-500 text-white w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-4 shadow-lg"><i data-lucide="users"></i></div>
+                        <h3 class="text-2xl font-bold text-pink-900 mb-2">Lolos Organisasi</h3>
+                        <p class="text-slate-600">Menjawab pertanyaan wawancara dengan elegan, terstruktur, dan percaya diri.</p>
                     </div>
-
-                    <div class="space-y-2 text-left mb-6">
-                        <div class="flex items-center gap-2 text-xs font-bold text-green-600 bg-green-50 p-2 rounded-lg">
-                            <i data-lucide="check-circle" class="w-4 h-4"></i>
-                            Termasuk Modul PPT
-                        </div>
-                        <div class="flex items-center gap-2 text-xs font-bold text-red-500 bg-red-50 p-2 rounded-lg">
-                            <i data-lucide="x-circle" class="w-4 h-4"></i>
-                            Tidak Ada Rekaman
-                        </div>
-                    </div>
-
-                    <p class="text-[10px] text-slate-400 text-center">
-                        Jadwal fleksibel sesuai kesepakatan.
-                    </p>
                 </div>
             </div>
 
+            <!-- PAGE 2: ROADMAP (Grid) -->
+            <div class="page-full">
+                <h2 class="text-3xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+                    <span class="w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center text-sm">Map</span>
+                    Roadmap Pembelajaran
+                </h2>
+                <div class="grid grid-cols-3 gap-6">
+                    <!-- Sesi 1 -->
+                    <div class="page-card bg-white p-6 border-l-8 border-blue-400">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wide">Sesi 01 (1,5 Jam)</span>
+                        <h3 class="text-xl font-bold text-slate-800 mt-1 mb-4">Bedah Struktur & Poin Kunci</h3>
+                        <ul class="space-y-2 text-sm text-slate-600">
+                            <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-green-500"></i> Pre-Test Kemampuan</li>
+                            <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-green-500"></i> Bedah Bagian Krusial</li>
+                            <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-green-500"></i> Merumuskan "Wow" Points</li>
+                        </ul>
+                    </div>
+                    <!-- Sesi 2 -->
+                    <div class="page-card bg-white p-6 border-l-8 border-purple-400">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wide">Sesi 02 (1,5 Jam)</span>
+                        <h3 class="text-xl font-bold text-slate-800 mt-1 mb-4">Hook & Storytelling</h3>
+                        <ul class="space-y-2 text-sm text-slate-600">
+                            <li class="flex gap-2"><i data-lucide="zap" class="w-4 h-4 text-yellow-500"></i> Teknik "Killer Opening"</li>
+                            <li class="flex gap-2"><i data-lucide="file-text" class="w-4 h-4 text-yellow-500"></i> Menyusun Skenario</li>
+                            <li class="flex gap-2"><i data-lucide="mic" class="w-4 h-4 text-yellow-500"></i> Meaningful Storytelling (Intonasi/Gestur)</li>
+                        </ul>
+                    </div>
+                    <!-- Sesi 3 -->
+                    <div class="page-card bg-slate-800 p-6 text-white border-l-8 border-blue-500">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wide">Sesi 03 (1,5 Jam)</span>
+                        <h3 class="text-xl font-bold text-white mt-1 mb-4">Visual & Teknik</h3>
+                        <ul class="space-y-2 text-sm text-slate-300">
+                            <li class="flex gap-2"><i data-lucide="monitor" class="w-4 h-4 text-blue-400"></i> Desain PPT Estetik</li>
+                            <li class="flex gap-2"><i data-lucide="user" class="w-4 h-4 text-blue-400"></i> Tips Stage Presence</li>
+                            <li class="flex gap-2"><i data-lucide="play" class="w-4 h-4 text-blue-400"></i> Latihan Tahap 1</li>
+                        </ul>
+                    </div>
+                    <!-- Sesi 4 -->
+                    <div class="page-card bg-slate-800 p-6 text-white border-l-8 border-purple-500">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wide">Sesi 04 (1,5 Jam)</span>
+                        <h3 class="text-xl font-bold text-white mt-1 mb-4">Gladi Bersih</h3>
+                        <ul class="space-y-2 text-sm text-slate-300">
+                            <li class="flex gap-2"><i data-lucide="refresh-cw" class="w-4 h-4 text-purple-400"></i> Simulasi Full</li>
+                            <li class="flex gap-2"><i data-lucide="help-circle" class="w-4 h-4 text-purple-400"></i> Simulasi Tanya Jawab</li>
+                            <li class="flex gap-2"><i data-lucide="message-circle" class="w-4 h-4 text-purple-400"></i> Feedback Total</li>
+                        </ul>
+                    </div>
+                    <!-- Sesi 5 -->
+                    <div class="page-card bg-yellow-50 p-6 border-2 border-yellow-200 col-span-2 flex flex-col justify-center">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-slate-900">Sesi 05: Wawancara Organisasi</h3>
+                            <span class="bg-yellow-400 text-yellow-900 text-xs font-black px-2 py-1 rounded">BONUS</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 mt-2">
+                            <div class="bg-white p-3 rounded-xl shadow-sm"><h4 class="font-bold text-sm text-slate-800 mb-1">Psikologi</h4><p class="text-xs text-slate-500">Pahami pewawancara.</p></div>
+                            <div class="bg-white p-3 rounded-xl shadow-sm"><h4 class="font-bold text-sm text-slate-800 mb-1">Metode S.T.A.R</h4><p class="text-xs text-slate-500">Jawab terstruktur.</p></div>
+                            <div class="bg-white p-3 rounded-xl shadow-sm"><h4 class="font-bold text-sm text-slate-800 mb-1">Role Play</h4><p class="text-xs text-slate-500">Simulasi nyata.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE 3: PRICING (Full Width Banner) -->
+            <div class="page-full bg-white rounded-3xl p-8 shadow-lg border border-slate-100 flex items-center justify-between relative overflow-hidden">
+                <div class="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-blue-50 to-transparent"></div>
+                
+                <div class="z-10">
+                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">Investasi Pendidikan</h3>
+                    <h2 class="text-4xl font-black text-slate-800 mb-1">Paket Lengkap</h2>
+                    <p class="text-slate-500">Investasi leher ke atas untuk masa depan yang lebih cerah.</p>
+                </div>
+
+                <div class="flex items-center gap-8 z-10">
+                    <div class="text-right">
+                        <div class="flex items-center gap-2 text-sm font-bold text-green-600 mb-1 justify-end"><i data-lucide="check-circle" class="w-4 h-4"></i> Termasuk Modul PPT</div>
+                        <div class="flex items-center gap-2 text-sm font-bold text-red-500 justify-end"><i data-lucide="x-circle" class="w-4 h-4"></i> Tidak Ada Rekaman</div>
+                    </div>
+                    <div class="bg-slate-900 text-white p-6 rounded-2xl shadow-xl text-center min-w-[200px]">
+                        <p class="text-xs text-slate-400 uppercase tracking-widest mb-1">Total 5 Sesi</p>
+                        <div class="text-4xl font-black mb-1">750<span class="text-xl">rb</span></div>
+                        <p class="text-[10px] text-slate-400 border-t border-slate-700 pt-2 mt-2">Rp 100.000 / Jam</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
