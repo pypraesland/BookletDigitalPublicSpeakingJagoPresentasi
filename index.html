@@ -11,54 +11,27 @@
         body { font-family: 'Nunito', sans-serif; background-color: #f0fdf4; }
         h1, h2, h3, h4 { font-family: 'Fredoka', sans-serif; }
         
+        /* Base styles */
         .booklet-container {
             margin: 0 auto;
             background: #fff;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Default (Mobile) - Portrait */
-        @media (max-width: 1023px) {
-            .booklet-container {
-                max-width: 550px;
-                border-radius: 0px;
-            }
-            .desktop-layout { display: none; }
-            .mobile-layout { display: block; }
-        }
-
-        /* Desktop - Landscape */
+        /* Mobile specific adjustments handled by Tailwind classes mostly */
+        
+        /* Desktop specific adjustments */
         @media (min-width: 1024px) {
-            .booklet-container {
-                max-width: 1200px; /* Lebar Landscape */
-                margin: 40px auto;
-                border-radius: 20px;
-                min-height: auto;
-                padding-bottom: 40px;
-            }
             body {
-                background-color: #eef2ff; /* Background luar booklet di desktop */
-                padding: 20px;
+                background-color: #eef2ff;
+                padding: 40px;
             }
-            .desktop-layout { display: flex; flex-wrap: wrap; gap: 20px; padding: 40px; }
-            .mobile-layout { display: none; }
-            
-            /* Card Style for Desktop Pages */
-            .page-card {
-                flex: 1 1 45%; /* 2 Kolom */
-                min-width: 400px;
+            .booklet-container {
+                max-width: 1200px;
                 border-radius: 24px;
-                overflow: hidden;
-                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-                transition: transform 0.3s ease;
-            }
-            .page-card:hover {
-                transform: translateY(-5px);
-            }
-            .page-full {
-                flex: 1 1 100%; /* Full Width Card */
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+                padding-bottom: 60px; /* Space at bottom */
             }
         }
 
@@ -88,8 +61,9 @@
     <!-- CONTAINER UTAMA -->
     <div class="booklet-container bg-white">
         
-        <!-- MOBILE LAYOUT (Portrait, Scroll Down) -->
-        <div class="mobile-layout">
+        <!-- ================= MOBILE LAYOUT (Portrait, Scroll Down) ================= -->
+        <!-- Hanya muncul di layar kecil (< 1024px) -->
+        <div class="lg:hidden block">
             <!-- HALAMAN 1: COVER -->
             <div class="relative min-h-[95vh] bg-gradient-to-br from-yellow-100 via-pink-100 to-blue-100 flex flex-col justify-center p-8 overflow-hidden text-center">
                 <div class="blob w-64 h-64 bg-yellow-300 top-[-50px] right-[-80px] opacity-70 blur-2xl"></div>
@@ -211,119 +185,136 @@
             </div>
         </div>
 
-        <!-- DESKTOP LAYOUT (Landscape, Grid Card) -->
-        <div class="desktop-layout hidden">
+        <!-- ================= DESKTOP LAYOUT (Landscape, Grid Card) ================= -->
+        <!-- Hanya muncul di layar besar (>= 1024px) -->
+        <div class="hidden lg:block p-10">
+            
             <!-- PAGE 1: COVER & GOAL (Side by Side) -->
-            <div class="page-full flex gap-6">
+            <div class="flex gap-8 mb-12 h-[500px]">
                 <!-- Cover -->
-                <div class="flex-1 bg-gradient-to-br from-yellow-100 via-pink-100 to-blue-100 rounded-3xl p-10 flex flex-col justify-center items-center text-center relative overflow-hidden shadow-lg border border-white">
-                    <div class="blob w-64 h-64 bg-yellow-300 top-[-50px] left-[-50px] opacity-60 blur-3xl"></div>
-                    <div class="blob w-64 h-64 bg-pink-300 bottom-[-50px] right-[-50px] opacity-60 blur-3xl"></div>
+                <div class="flex-[3] bg-gradient-to-br from-yellow-100 via-pink-100 to-blue-100 rounded-[30px] p-12 flex flex-col justify-center items-center text-center relative overflow-hidden shadow-xl border-4 border-white transition-transform hover:scale-[1.01]">
+                    <div class="blob w-72 h-72 bg-yellow-300 top-[-50px] left-[-50px] opacity-60 blur-3xl"></div>
+                    <div class="blob w-72 h-72 bg-pink-300 bottom-[-50px] right-[-50px] opacity-60 blur-3xl"></div>
                     <div class="relative z-10">
-                        <div class="inline-block px-4 py-1 bg-white rounded-full text-blue-600 font-bold text-xs uppercase tracking-widest mb-6 shadow-sm border border-blue-100">Privat 1-on-1</div>
-                        <h1 class="text-6xl font-black text-slate-800 mb-2">Jago Presentasi</h1>
-                        <h2 class="text-4xl text-blue-600 font-bold mb-4">Karya Tulis Ilmiah</h2>
-                        <p class="text-xl text-slate-600 mb-8 font-medium">& Persiapan Wawancara Organisasi</p>
-                        <p class="text-slate-500 max-w-md mx-auto italic">"Ubah data penelitian jadi cerita juara dan hadapi wawancara organisasi dengan percaya diri!"</p>
+                        <div class="inline-block px-5 py-2 bg-white rounded-full text-blue-600 font-bold text-sm uppercase tracking-widest mb-6 shadow-md border border-blue-100">Privat 1-on-1</div>
+                        <h1 class="text-7xl font-black text-slate-800 mb-2 leading-tight">Jago Presentasi</h1>
+                        <h2 class="text-5xl text-blue-600 font-bold mb-6">Karya Tulis Ilmiah</h2>
+                        <p class="text-2xl text-slate-600 mb-8 font-medium">& Persiapan Wawancara Organisasi</p>
+                        <p class="text-slate-500 text-lg max-w-lg mx-auto italic font-medium">"Ubah data penelitian jadi cerita juara dan hadapi wawancara organisasi dengan percaya diri!"</p>
                     </div>
                 </div>
                 
                 <!-- Goals -->
-                <div class="w-1/3 flex flex-col gap-6">
-                    <div class="flex-1 bg-blue-50 p-8 rounded-3xl border-2 border-blue-100 flex flex-col justify-center items-start shadow-md hover:shadow-lg transition">
-                        <div class="bg-blue-500 text-white w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-4 shadow-lg"><i data-lucide="trophy"></i></div>
+                <div class="flex-1 flex flex-col gap-6">
+                    <div class="flex-1 bg-blue-50 p-8 rounded-[30px] border-2 border-blue-100 flex flex-col justify-center items-start shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+                        <div class="bg-blue-500 text-white w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-4 shadow-lg rotate-3"><i data-lucide="trophy"></i></div>
                         <h3 class="text-2xl font-bold text-blue-900 mb-2">Juara LKTI</h3>
-                        <p class="text-slate-600">Strategi memenangkan lomba dengan teknik penyampaian yang meyakinkan juri.</p>
+                        <p class="text-slate-600 font-medium">Strategi memenangkan lomba dengan teknik penyampaian yang meyakinkan juri.</p>
                     </div>
-                    <div class="flex-1 bg-pink-50 p-8 rounded-3xl border-2 border-pink-100 flex flex-col justify-center items-start shadow-md hover:shadow-lg transition">
-                        <div class="bg-pink-500 text-white w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-4 shadow-lg"><i data-lucide="users"></i></div>
+                    <div class="flex-1 bg-pink-50 p-8 rounded-[30px] border-2 border-pink-100 flex flex-col justify-center items-start shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+                        <div class="bg-pink-500 text-white w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-4 shadow-lg -rotate-3"><i data-lucide="users"></i></div>
                         <h3 class="text-2xl font-bold text-pink-900 mb-2">Lolos Organisasi</h3>
-                        <p class="text-slate-600">Menjawab pertanyaan wawancara dengan elegan, terstruktur, dan percaya diri.</p>
+                        <p class="text-slate-600 font-medium">Menjawab pertanyaan wawancara dengan elegan, terstruktur, dan percaya diri.</p>
                     </div>
                 </div>
             </div>
 
             <!-- PAGE 2: ROADMAP (Grid) -->
-            <div class="page-full">
-                <h2 class="text-3xl font-bold text-slate-800 mb-6 flex items-center gap-3">
-                    <span class="w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center text-sm">Map</span>
+            <div class="mb-12">
+                <h2 class="text-4xl font-bold text-slate-800 mb-8 flex items-center gap-4">
+                    <span class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center text-xl shadow-lg"><i data-lucide="map"></i></span>
                     Roadmap Pembelajaran
                 </h2>
                 <div class="grid grid-cols-3 gap-6">
                     <!-- Sesi 1 -->
-                    <div class="page-card bg-white p-6 border-l-8 border-blue-400">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wide">Sesi 01 (1,5 Jam)</span>
-                        <h3 class="text-xl font-bold text-slate-800 mt-1 mb-4">Bedah Struktur & Poin Kunci</h3>
-                        <ul class="space-y-2 text-sm text-slate-600">
-                            <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-green-500"></i> Pre-Test Kemampuan</li>
-                            <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-green-500"></i> Bedah Bagian Krusial</li>
-                            <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-green-500"></i> Merumuskan "Wow" Points</li>
+                    <div class="bg-white p-8 rounded-[24px] border-2 border-gray-100 shadow-md hover:shadow-xl transition-all hover:-translate-y-2 relative overflow-hidden group">
+                        <div class="absolute top-0 left-0 w-2 h-full bg-blue-400"></div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wide bg-slate-100 px-3 py-1 rounded-full">Sesi 01</span>
+                            <span class="text-blue-500 font-bold text-sm">1,5 Jam</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4 group-hover:text-blue-600 transition-colors">Bedah Struktur & Poin Kunci</h3>
+                        <ul class="space-y-3 text-sm text-slate-600">
+                            <li class="flex gap-3 items-start"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500 flex-shrink-0"></i> Pre-Test Kemampuan</li>
+                            <li class="flex gap-3 items-start"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500 flex-shrink-0"></i> Bedah Bagian Krusial</li>
+                            <li class="flex gap-3 items-start"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500 flex-shrink-0"></i> Merumuskan "Wow" Points</li>
                         </ul>
                     </div>
                     <!-- Sesi 2 -->
-                    <div class="page-card bg-white p-6 border-l-8 border-purple-400">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wide">Sesi 02 (1,5 Jam)</span>
-                        <h3 class="text-xl font-bold text-slate-800 mt-1 mb-4">Hook & Storytelling</h3>
-                        <ul class="space-y-2 text-sm text-slate-600">
-                            <li class="flex gap-2"><i data-lucide="zap" class="w-4 h-4 text-yellow-500"></i> Teknik "Killer Opening"</li>
-                            <li class="flex gap-2"><i data-lucide="file-text" class="w-4 h-4 text-yellow-500"></i> Menyusun Skenario</li>
-                            <li class="flex gap-2"><i data-lucide="mic" class="w-4 h-4 text-yellow-500"></i> Meaningful Storytelling (Intonasi/Gestur)</li>
+                    <div class="bg-white p-8 rounded-[24px] border-2 border-gray-100 shadow-md hover:shadow-xl transition-all hover:-translate-y-2 relative overflow-hidden group">
+                        <div class="absolute top-0 left-0 w-2 h-full bg-purple-400"></div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wide bg-slate-100 px-3 py-1 rounded-full">Sesi 02</span>
+                            <span class="text-purple-500 font-bold text-sm">1,5 Jam</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4 group-hover:text-purple-600 transition-colors">Hook & Storytelling</h3>
+                        <ul class="space-y-3 text-sm text-slate-600">
+                            <li class="flex gap-3 items-start"><i data-lucide="zap" class="w-5 h-5 text-yellow-500 flex-shrink-0"></i> Teknik "Killer Opening"</li>
+                            <li class="flex gap-3 items-start"><i data-lucide="file-text" class="w-5 h-5 text-yellow-500 flex-shrink-0"></i> Menyusun Skenario</li>
+                            <li class="flex gap-3 items-start"><i data-lucide="mic" class="w-5 h-5 text-yellow-500 flex-shrink-0"></i> Meaningful Storytelling (Intonasi/Gestur)</li>
                         </ul>
                     </div>
                     <!-- Sesi 3 -->
-                    <div class="page-card bg-slate-800 p-6 text-white border-l-8 border-blue-500">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wide">Sesi 03 (1,5 Jam)</span>
-                        <h3 class="text-xl font-bold text-white mt-1 mb-4">Visual & Teknik</h3>
-                        <ul class="space-y-2 text-sm text-slate-300">
-                            <li class="flex gap-2"><i data-lucide="monitor" class="w-4 h-4 text-blue-400"></i> Desain PPT Estetik</li>
-                            <li class="flex gap-2"><i data-lucide="user" class="w-4 h-4 text-blue-400"></i> Tips Stage Presence</li>
-                            <li class="flex gap-2"><i data-lucide="play" class="w-4 h-4 text-blue-400"></i> Latihan Tahap 1</li>
+                    <div class="bg-slate-800 p-8 rounded-[24px] border-l-8 border-blue-500 text-white shadow-md hover:shadow-xl transition-all hover:-translate-y-2 group">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold text-slate-300 uppercase tracking-wide bg-slate-700 px-3 py-1 rounded-full">Sesi 03</span>
+                            <span class="text-blue-400 font-bold text-sm">1,5 Jam</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-blue-300 transition-colors">Visual & Teknik</h3>
+                        <ul class="space-y-3 text-sm text-slate-300">
+                            <li class="flex gap-3 items-start"><i data-lucide="monitor" class="w-5 h-5 text-blue-400 flex-shrink-0"></i> Desain PPT Estetik</li>
+                            <li class="flex gap-3 items-start"><i data-lucide="user" class="w-5 h-5 text-blue-400 flex-shrink-0"></i> Tips Stage Presence</li>
+                            <li class="flex gap-3 items-start"><i data-lucide="play" class="w-5 h-5 text-blue-400 flex-shrink-0"></i> Latihan Tahap 1</li>
                         </ul>
                     </div>
                     <!-- Sesi 4 -->
-                    <div class="page-card bg-slate-800 p-6 text-white border-l-8 border-purple-500">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wide">Sesi 04 (1,5 Jam)</span>
-                        <h3 class="text-xl font-bold text-white mt-1 mb-4">Gladi Bersih</h3>
-                        <ul class="space-y-2 text-sm text-slate-300">
-                            <li class="flex gap-2"><i data-lucide="refresh-cw" class="w-4 h-4 text-purple-400"></i> Simulasi Full</li>
-                            <li class="flex gap-2"><i data-lucide="help-circle" class="w-4 h-4 text-purple-400"></i> Simulasi Tanya Jawab</li>
-                            <li class="flex gap-2"><i data-lucide="message-circle" class="w-4 h-4 text-purple-400"></i> Feedback Total</li>
+                    <div class="bg-slate-800 p-8 rounded-[24px] border-l-8 border-purple-500 text-white shadow-md hover:shadow-xl transition-all hover:-translate-y-2 group">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold text-slate-300 uppercase tracking-wide bg-slate-700 px-3 py-1 rounded-full">Sesi 04</span>
+                            <span class="text-purple-400 font-bold text-sm">1,5 Jam</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-purple-300 transition-colors">Gladi Bersih</h3>
+                        <ul class="space-y-3 text-sm text-slate-300">
+                            <li class="flex gap-3 items-start"><i data-lucide="refresh-cw" class="w-5 h-5 text-purple-400 flex-shrink-0"></i> Simulasi Full</li>
+                            <li class="flex gap-3 items-start"><i data-lucide="help-circle" class="w-5 h-5 text-purple-400 flex-shrink-0"></i> Simulasi Tanya Jawab</li>
+                            <li class="flex gap-3 items-start"><i data-lucide="message-circle" class="w-5 h-5 text-purple-400 flex-shrink-0"></i> Feedback Total</li>
                         </ul>
                     </div>
                     <!-- Sesi 5 -->
-                    <div class="page-card bg-yellow-50 p-6 border-2 border-yellow-200 col-span-2 flex flex-col justify-center">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-slate-900">Sesi 05: Wawancara Organisasi</h3>
-                            <span class="bg-yellow-400 text-yellow-900 text-xs font-black px-2 py-1 rounded">BONUS</span>
+                    <div class="bg-yellow-50 p-8 rounded-[24px] border-4 border-yellow-200 col-span-2 flex flex-col justify-center relative overflow-hidden">
+                        <div class="absolute -right-10 -top-10 w-40 h-40 bg-yellow-300 rounded-full blur-3xl opacity-50"></div>
+                        <div class="flex justify-between items-center mb-6 relative z-10">
+                            <h3 class="text-3xl font-black text-slate-900">Sesi 05: Wawancara Organisasi</h3>
+                            <span class="bg-yellow-400 text-yellow-900 text-sm font-black px-4 py-2 rounded-full shadow-sm transform rotate-2">BONUS EKSKLUSIF</span>
                         </div>
-                        <div class="grid grid-cols-3 gap-4 mt-2">
-                            <div class="bg-white p-3 rounded-xl shadow-sm"><h4 class="font-bold text-sm text-slate-800 mb-1">Psikologi</h4><p class="text-xs text-slate-500">Pahami pewawancara.</p></div>
-                            <div class="bg-white p-3 rounded-xl shadow-sm"><h4 class="font-bold text-sm text-slate-800 mb-1">Metode S.T.A.R</h4><p class="text-xs text-slate-500">Jawab terstruktur.</p></div>
-                            <div class="bg-white p-3 rounded-xl shadow-sm"><h4 class="font-bold text-sm text-slate-800 mb-1">Role Play</h4><p class="text-xs text-slate-500">Simulasi nyata.</p></div>
+                        <div class="grid grid-cols-3 gap-6 relative z-10">
+                            <div class="bg-white p-5 rounded-2xl shadow-sm border border-yellow-100 hover:scale-105 transition"><h4 class="font-bold text-base text-slate-800 mb-1">Psikologi</h4><p class="text-sm text-slate-500">Pahami pewawancara.</p></div>
+                            <div class="bg-white p-5 rounded-2xl shadow-sm border border-yellow-100 hover:scale-105 transition"><h4 class="font-bold text-base text-slate-800 mb-1">Metode S.T.A.R</h4><p class="text-sm text-slate-500">Jawab terstruktur.</p></div>
+                            <div class="bg-white p-5 rounded-2xl shadow-sm border border-yellow-100 hover:scale-105 transition"><h4 class="font-bold text-base text-slate-800 mb-1">Role Play</h4><p class="text-sm text-slate-500">Simulasi nyata.</p></div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- PAGE 3: PRICING (Full Width Banner) -->
-            <div class="page-full bg-white rounded-3xl p-8 shadow-lg border border-slate-100 flex items-center justify-between relative overflow-hidden">
-                <div class="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-blue-50 to-transparent"></div>
+            <div class="bg-white rounded-[30px] p-10 shadow-2xl border border-slate-100 flex items-center justify-between relative overflow-hidden h-48">
+                <div class="absolute right-0 top-0 h-full w-2/5 bg-gradient-to-l from-blue-600 to-transparent opacity-10"></div>
                 
-                <div class="z-10">
-                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">Investasi Pendidikan</h3>
-                    <h2 class="text-4xl font-black text-slate-800 mb-1">Paket Lengkap</h2>
-                    <p class="text-slate-500">Investasi leher ke atas untuk masa depan yang lebih cerah.</p>
+                <div class="z-10 pl-4">
+                    <h3 class="text-base font-bold text-slate-400 uppercase tracking-widest mb-2">Investasi Pendidikan</h3>
+                    <h2 class="text-5xl font-black text-slate-800 mb-2">Paket Lengkap</h2>
+                    <p class="text-xl text-slate-500 font-medium">Investasi leher ke atas untuk masa depan yang lebih cerah.</p>
                 </div>
 
-                <div class="flex items-center gap-8 z-10">
+                <div class="flex items-center gap-10 z-10 pr-4">
                     <div class="text-right">
-                        <div class="flex items-center gap-2 text-sm font-bold text-green-600 mb-1 justify-end"><i data-lucide="check-circle" class="w-4 h-4"></i> Termasuk Modul PPT</div>
-                        <div class="flex items-center gap-2 text-sm font-bold text-red-500 justify-end"><i data-lucide="x-circle" class="w-4 h-4"></i> Tidak Ada Rekaman</div>
+                        <div class="flex items-center gap-3 text-base font-bold text-green-600 mb-2 justify-end bg-green-50 px-4 py-2 rounded-lg"><i data-lucide="check-circle" class="w-5 h-5"></i> Termasuk Modul PPT</div>
+                        <div class="flex items-center gap-3 text-base font-bold text-red-500 justify-end bg-red-50 px-4 py-2 rounded-lg"><i data-lucide="x-circle" class="w-5 h-5"></i> Tidak Ada Rekaman</div>
                     </div>
-                    <div class="bg-slate-900 text-white p-6 rounded-2xl shadow-xl text-center min-w-[200px]">
-                        <p class="text-xs text-slate-400 uppercase tracking-widest mb-1">Total 5 Sesi</p>
-                        <div class="text-4xl font-black mb-1">750<span class="text-xl">rb</span></div>
-                        <p class="text-[10px] text-slate-400 border-t border-slate-700 pt-2 mt-2">Rp 100.000 / Jam</p>
+                    <div class="bg-slate-900 text-white p-8 rounded-[24px] shadow-2xl text-center min-w-[240px] transform hover:scale-105 transition border-4 border-slate-800">
+                        <p class="text-xs text-slate-400 uppercase tracking-widest mb-2">Total 5 Sesi</p>
+                        <div class="text-5xl font-black mb-2">750<span class="text-2xl font-bold text-slate-400">rb</span></div>
+                        <p class="text-xs text-slate-400 border-t border-slate-700 pt-3 mt-3 font-mono">Rp 100.000 / Jam</p>
                     </div>
                 </div>
             </div>
